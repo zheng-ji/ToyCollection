@@ -1,0 +1,34 @@
+what
+levelDB中Slice非常简单的数据结构，它包括length和一个指向外部字节数组的指针。
+
+Why
+为什么使用Slice，而不直接使用std::string呢？
+相比返回string，返回Slice的开销会小的多（没有拷贝，Slice中没有实际数据，只有指向数据的指针，开销低）。
+
+How:
+
+private 成员
+    const char *data_;
+    size_t size_;
+
+拥有如下复制构造函数
+    Slice();data_(""),size_() {}
+    Slice(const char* d,size_t n);
+    Slice(const string & b)();
+
+功能函数：
+    size_t size();
+    const char* data() const
+    bool empty() const
+    bool starts_with(const slice& x) const
+    void remove_prefix(size_t n);
+    std::string ToString() const
+    void clear();
+    inline bool operator == (const Slice& x,const Slice& y);
+    int compare(const Slice& b)
+    inline bool operator != (const Slice& x,const Slice& y);
+    char operator[] (size_t n) const
+
+使用的函数
+assert()
+memcmp(char* a,char* b,size_t n)
