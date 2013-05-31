@@ -10,7 +10,7 @@ string Shortener::baseN(int num) {
 }
 
 string Shortener::lstrip(string other) {
-    const char * tmp = other.c_str();
+    const char * tmp = other.c_str(); //string的c_str()返回的是const char *
     while(*tmp == '0') {
         tmp ++ ;
     }
