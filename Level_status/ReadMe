@@ -1,0 +1,36 @@
+void *memcpy(void *dest, const void *src, size_t n);
+
+status用于返回状态信息：
+该类只有一个成员变量:
+state_:
+state_[0:3] length
+state_[4] code
+state_[5:] msg
+
+enum Code {
+    kOk = 0,
+    kNotFound = 1,
+    kCorruption = 2,
+    kNotSupported = 3,
+    kInvalidArgument = 4,
+    kIOError = 5,
+};
+
+Status::Status(Code code, const Slice& msg, const Slice& msg2) {
+    assert(code != kOk);
+    const uint32_t len1 = msg.size();
+    const uint32_t len2 = msg2.size();
+    const uint32_t size = len1 + (len2 ? (2 + len2) : 0);
+    char* result = new char[size + 5];
+    memcpy(result, &size, sizeof(size));
+    result[4] = static_cast<char>(code);
+    memcpy(result + 5, msg.data(), len1);
+    if (len2) {
+        result[5 + len1] = ':';
+        result[6 + len1] = ' ';
+        memcpy(result + 7 + len1, msg2.data(), len2);
+    }
+    state_ = result;
+}
+
+
