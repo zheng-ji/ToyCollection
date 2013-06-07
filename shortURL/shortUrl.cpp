@@ -1,4 +1,4 @@
-#include "short.h"
+#include "shortUrl.h"
 
 const string g_dict = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
