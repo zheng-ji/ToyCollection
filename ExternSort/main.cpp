@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <fstream>
-#include "ExternSort.h"
+#include "ExSort.h"
 using namespace std;
 
 const unsigned int count = 100; // 文件里数据的行数

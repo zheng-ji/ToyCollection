@@ -1,4 +1,4 @@
-#include "ExternSort.h"
+#include "ExSort.h"
 
 void ExternSort:: sort() {
     time_t start = time(NULL);
