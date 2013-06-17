@@ -8,6 +8,8 @@ const unsigned int count = 100; // 文件里数据的行数
 
 const unsigned int number_to_sort = 10; //在内存中一次排序的数量
 
+const unsigned int target_num = 5;
+
 const char *unsort_file = "unsort_data.txt"; //原始未排序的文件名
 
 const char *sort_file = "sort_data.txt"; //已排序的文件名
@@ -18,7 +20,7 @@ int main(int argc, char* *argv)
 {
     srand(time(NULL));
     init_data(count);
-    ExternSort extSort(unsort_file, sort_file, number_to_sort);
+    ExternSort extSort(unsort_file, sort_file, number_to_sort,target_num);
     extSort.sort();
     return 0;
 }
