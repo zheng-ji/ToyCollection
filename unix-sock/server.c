@@ -9,8 +9,7 @@
 #define BUFSIZE 512*1024
 
 //define unix domain socket path
-#define pmmanager   "/tmp/pmmanager"
-#define pmapi       "/tmp/pmapi"
+#define pmmanager   "pmmanager"
 
 int main(int argc, char** argv)
 {
