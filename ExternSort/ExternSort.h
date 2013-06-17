@@ -44,7 +44,7 @@ class ExternSort {
 
         void write_data(FILE *f,int a[],int n) {
             for(int i = 0; i < n; i++)
-                fprintf(f,"%d",a[i]);
+                fprintf(f,"%d ",a[i]);
         }
 
         char * temp_filename(int index) {
@@ -63,6 +63,7 @@ class ExternSort {
             int *array = new int[m_count];
             while ((n = read_data(fin,array,m_count)) > 0) {
                 qsort(array,n,sizeof(int),cmp_int);
+                std::cout << array[0] << std::endl;
                 char *fileName = temp_filename(file_count++);
                 FILE * tempFile = fopen(fileName,"w");
                 free(fileName);
@@ -99,8 +100,8 @@ class ExternSort {
             }
             while(true)
             {
-                //求data中可用的最小的数字，并记录对应文件的索引
                 int max = data[0];
+                //求data中可用的最小的数字，并记录对应文件的索引
                 int j = 0;
                 for(i = 0; i < file_count; ++i)
                 {
