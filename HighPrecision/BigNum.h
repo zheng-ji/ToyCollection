@@ -1,5 +1,6 @@
 #ifndef _BIG_NUM_H_
 #define _BIG_NUM_H_
+
 #include <string.h>
 #include <sstream>
 #include <string>
@@ -122,7 +123,5 @@ class Bint {
         friend bool operator <= (const Bint& a, const Bint& b){
             return !(b < a);
         }
-
-            
 };
 #endif
