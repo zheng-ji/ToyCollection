@@ -1,0 +1,6 @@
+执行makefile
+    make
+
+使用:
+    import Bint
+    Bint.mul(200000,400000)
