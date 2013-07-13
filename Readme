@@ -1,0 +1,16 @@
+http://acm.hdu.edu.cn/showproblem.php?pid=2222
+
+难点在于构造fail指针`
+
+input :
+1
+5
+she
+he
+say
+shr
+her
+yasherhs
+
+output:
+3
