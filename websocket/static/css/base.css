@@ -1,0 +1,50 @@
+body {
+    background:url("../img/bg.jpg") repeat;
+}
+
+#content {
+    border-style: none;
+    margin: 0 auto;
+    width: 50%;/*必须指定宽度,可为百分比或像素值*/
+}
+
+#chat-input {
+    width:500px;
+    height:50px;
+    border-style: none;
+    background:rgba(0, 0, 0, 0.4) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+    filter:Alpha(opacity=40);
+    background:#000000;/*实现IE背景透明*/
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+}
+
+#sendmsg {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    position:relative;
+    left:450px;
+    margin-top: 6px;
+    margin-bottom: 3px;
+}
+
+#responseText {
+    border-style: none;
+    width:500px;
+    height:300px;
+    background:rgba(0, 0, 0, 0.4) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+    filter:Alpha(opacity=40);
+    background:#000000;/*实现IE背景透明*/
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+}
+
+#footer {
+    font:italic bold 12px/20px arial,sans-serif;
+}
+#about {
+    margin:0 auto;
+    width:50%
+}
+
+
