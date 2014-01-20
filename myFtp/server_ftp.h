@@ -2,17 +2,7 @@
 #include <file_transfer_functions.h>
 
 #include <time.h>
-/*
-	for:
-		ctime()
-*/
-
 #include <sys/stat.h>
-/*
-	for:
-		stat()
-*/
-
 #define	ID	"SERVER=> "
 
 struct client_info

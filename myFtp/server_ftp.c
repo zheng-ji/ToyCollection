@@ -94,7 +94,6 @@ void* serve_client(void* info)
 					command_put(shp, data, sfd_client);
 					break;
 				default:
-					// print error
 					break;
 			}
 		}
