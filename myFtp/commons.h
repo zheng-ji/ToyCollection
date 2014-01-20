@@ -55,13 +55,14 @@ struct packet* ntohp(struct packet*);
 struct packet* htonp(struct packet*);
 void printpacket(struct packet*, int);
 
-#define NCOMMANDS 4
+#define NCOMMANDS 5
 enum COMMAND
 {
     GET,
     PUT,
     CD,
-    LS
+    LS,
+    EXIT
 };			// any change made here should also be 
 
 #endif

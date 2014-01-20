@@ -65,12 +65,15 @@ int main(int argc, char* argv[])
 			case LS:
 				command_ls(chp, data, sfd_client);
 				break;
+            case EXIT:
+                goto outside_client_command_loop;
+                break;
 			default:
 				// display error
 				break;
 		}
 	}
-	//outside_client_command_loop:
+	outside_client_command_loop:
 	
 	close(sfd_client);
 	printf(ID "Done.\n");

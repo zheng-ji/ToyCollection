@@ -7,7 +7,8 @@ static const char commandlist[NCOMMANDS][4] =
     "get",
     "put",
     "cd",
-    "ls"
+    "ls",
+    "exit"
 };			
 
 static void append_path(struct command* c, char* s)

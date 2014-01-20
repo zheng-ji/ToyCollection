@@ -105,8 +105,7 @@ void* serve_client(void* info)
 			break;
 		}
 	}
-
-	close(sfd_client);
-	fflush(stdout);
+    close(sfd_client);
+    fflush(stdout);
 }
 
