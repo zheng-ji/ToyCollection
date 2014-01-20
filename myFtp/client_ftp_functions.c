@@ -50,17 +50,10 @@ struct command* userinputtocommand(char s[LENUSERINPUT])
 					cmd->id = j;
 					break;
 				}
-			}// ommitting braces for the "for loop" here is \
-			 disastrous because the else below gets \
-			 associated with the "if inside the for loop". \
-			 #BUGFIX
+			}
 		else
 			append_path(cmd, token);
 	}
-	if(cmd->id == MGET && !strcmp(*cmd->paths, "*"))
-		cmd->id = MGETWILD;
-	else if(cmd->id == MPUT && !strcmp(*cmd->paths, "*"))
-		cmd->id = MPUTWILD;
 	if(cmd->id != -1)
 		return cmd;
 	else
@@ -194,5 +187,4 @@ void command_put(struct packet* chp, struct packet* data, int sfd_client, char* 
 		fprintf(stderr, "Error sending file.\n");
 	send_EOT(chp, data, sfd_client);
 }
-
 
