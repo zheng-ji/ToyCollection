@@ -1,0 +1,52 @@
+*gdbvim.txt* Plugin for gdb cooperation
+
+You will want to use the plugin if you use gdbvim program. Mappings and
+commands described below will not work until you run a gdbvim program that
+will speak to given instance of vim.
+
+More precisely, the usage is as follows:
+
+Step 1:
+		Launch vim or gvim with particular name. (optional - if you
+		omit this step, gvim shall be launched)
+Step 2:
+		Run gdbvim as if you were running gdb, only with other
+		optional parameter --server for server name. 
+
+After that, you can work normally in gdb window, or send commands from vim.
+
+Mappings:				*gdbvim-mappings*
+
+<C-F5>	
+		Run a program
+<F8>	
+		Step program until it reaches a different source line. With
+		[count]: do this N times.
+<F7>	
+		Step program, proceeding through subroutine calls. With
+		[count]: do this N times.
+<F6>	
+		Execute until selected stack frame returns.
+<F5>	
+		Continue program being debugged, after signal or breakpoint.
+		With [count]: ignore this breakpoint N-1 times.
+<C-P>	
+		Print value of word below cursor(normal mode) or of
+		visually selected text (visual mode).
+<F9>	
+		Set breakpoint on current line.
+
+Commands:				*gdbvim-commands*
+
+Gdb {text}	
+		Execute given text in gdb as if it came from console. If
+		[count] is specified, it is appended as a number behind the
+		command. If you create mapping for this and expect [count] to
+		be used with it, use <C-U> this way:
+			map key :<C-U>Gdb command
+		(See |c_CTRL-U| and |v:count| for why it is needed)
+
+					*gdbvim-settings*
+loaded_gdbvim_mappings	Set to prevent activating mappings as above; only :Gdb
+			command will work then.
+loaded_gdbvim		Set to prevent loading the plugin completely.
