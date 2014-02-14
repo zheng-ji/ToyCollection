@@ -1,0 +1,245 @@
+set nocompatible            " Use Vim defaults much better!
+" Encoding and file format
+set ff=unix
+set encoding=utf-8
+set fenc=utf-8
+set fencs=utf-8,usc-bom,euc-jp,gb18030,gb2312,cp936,gbk
+set fdm=marker
+
+set bs=2                    " allow backspacing over everything in insert mode
+set viminfo='20,\"50        " read/write a .viminfo file, don't store more
+                            " than 50 lines of registers
+set history=50              " keep 50 lines of command line history
+set ruler                   " show the cursor position all the time
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+    " In text files, always limit the width of text to 78 characters
+    autocmd BufRead *.txt set tw=78
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+                \   exe "normal g'\"" |
+                \ endif
+endif
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+    "if &t_Co > 1
+    syntax on
+    set hlsearch
+endif
+
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[4%dm
+    set t_Sf=^[3%dm
+endif
+
+" some extra commands for HTML editing
+nmap ,mh wbgueyei<<ESC>ea></<ESC>pa><ESC>bba
+nmap ,h1 _i<h1><ESC>A</h1><ESC>
+nmap ,h2 _i<h2><ESC>A</h2><ESC>
+nmap ,h3 _i<h3><ESC>A</h3><ESC>
+nmap ,h4 _i<h4><ESC>A</h4><ESC>
+nmap ,h5 _i<h5><ESC>A</h5><ESC>
+nmap ,h6 _i<h6><ESC>A</h6><ESC>
+nmap ,hb wbi<b><ESC>ea</b><ESC>bb
+nmap ,he wbi<em><ESC>ea</em><ESC>bb
+nmap ,hi wbi<i><ESC>ea</i><ESC>bb
+nmap ,hu wbi<u><ESC>ea</i><ESC>bb
+nmap ,hs wbi<strong><ESC>ea</strong><ESC>bb
+nmap ,ht wbi<tt><ESC>ea</tt><ESC>bb
+nmap ,hx wbF<df>f<df>
+
+
+" Have the mouse enable all the time
+set mouse=a
+
+set nocp incsearch
+set cinoptions=0,p0,t0
+set cinwords=if,else,while,do,for,switch,case
+set formatoptions=tcqr
+set invnumber
+set expandtab
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+
+
+
+filetype plugin indent on 
+filetype indent on 
+syntax on
+filetype plugin on
+let g:pydiction_location = '~/.vim/dict/complete-dict' 
+
+
+"Qucik Access.
+"Set mapleader
+let mapleader = ","
+
+"Fast reloading of the .vimrc
+map <silent> <leader>s :source $HOME/.vimrc<cr>
+"Fast editing of .vimrc
+map <silent> <leader>e :e $HOME/.vimrc<cr>
+"When .vimrc is edited, reload it
+autocmd! bufwritepost .vimrc source $HOME/.vimrc
+
+
+"Seach Path.
+set path+=.,../*,../../*,/usr/include,/usr/local/include,/usr/local/include/cppunit,../include,../../include
+set tags+=./tags,../tags,../../tags,../../../tags,../../../../tags
+
+""""""""""""""""""""""""""""""
+" lookupfile setting
+""""""""""""""""""""""""""""""
+let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
+if filereadable("./filenametags")               "设置tag文件的名字
+    let g:LookupFile_TagExpr = '"./filenametags"'
+endif
+nmap <silent> <leader>lk <Plug>LookupFile<cr>   
+nmap <silent> <leader>ll :LUBufs<cr>            
+nmap <silent> <leader>lw :LUWalk<cr>           
+
+"注释//
+nmap <silent> <leader>cm :s+^+//<cr>
+
+""""""""""""""""""""""""""""
+"设置帮助文档编码
+""""""""""""""""""""""""""""
+set helplang=en    
+
+"这两个映射可以把一连串的空行 (;b) 或空白行 (;n) 压缩到一行 >
+map <leader>b   GoZ<Esc>:g/^$/.,/./-j<CR>Gdd
+map <leader>n   GoZ<Esc>:g/^[ <Tab>]*$/.,/[^ <Tab>]/-j<CR>Gdd
+
+"""""""""""""""""""""""""""
+"C++补全选项
+"""""""""""""""""""""""""""
+" build tags of your own project with CTRL+F12
+map <F8> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
+"Smart way to move btw. windows
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
+
+"Tab configuration
+map <leader>tn :tabnew<cr>
+map <leader>te :tabedit<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove<cr>
+
+"My information
+iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buffer realted
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Restore cursor to file position in previous editing session
+set viminfo='10,\"100,:20,n~/.viminfo
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Session options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set sessionoptions-=curdir
+set sessionoptions+=sesdir
+
+""""""""""""""""""""""""""""""
+" Indent
+""""""""""""""""""""""""""""""
+set ai
+set si
+set cindent
+set wrap
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Complete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" options
+set complete-=u
+set complete-=i
+
+" mapping
+"inoremap <expr> <CR>       pumvisible()?"\<C-Y>":"\<CR>"
+"inoremap <expr> <C-J>      pumvisible()?"\<PageDown>\<C-N>\<C-P>":"\<C-X><C-O>"
+"inoremap <expr> <C-K>      pumvisible()?"\<PageUp>\<C-P>\<C-N>":"\<C-K>"
+"inoremap <expr> <C-U>      pumvisible()?"\<C-E>":"\<C-U>"
+"inoremap <C-]>             <C-X><C-]>
+"inoremap <C-F>             <C-X><C-F>
+"inoremap <C-D>             <C-X><C-D>
+"inoremap <C-L>             <C-X><C-L>
+
+"Fast Ex command
+nnoremap ; :
+
+"Fast quiting
+nmap <silent> <leader>x :x<cr>
+nmap <silent> <leader>qf :q!<cr>
+nmap <silent> <leader>q :q<cr>
+nmap <silent> <leader>qa :qa<cr>
+nmap <silent> <leader>w :w<cr>
+nmap <silent> <leader>G G$
+
+""""""""""""""""""""""""""""""
+" vimgdb setting
+""""""""""""""""""""""""""""""
+let g:vimgdb_debug_file = ""
+run macros/gdb_mappings.vim
+se nu
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+run macros/cscope_maps.vim
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nerdtree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeWinPos = "left"
+
+let NERDTreeWinSize = 31
+
+nmap <F3> <ESC>:NERDTreeToggle<RETURN>
+colorscheme darkburn
+set t_Co=256 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" golang
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("mac") || has("macunix")
+    set runtimepath+=~/go/misc/vim
+endif
+
+function Mytitle()
+    call setline(1,"/**********************************************")
+    call append(line(". "),"  Author:   zhengji@youmi.net")
+    call append(line(". ")+1,"  Time:     ".strftime("%c"))
+    call append(line(".")+2,"  File:     ".expand("%"))
+    call append(line(".")+3,"  Desc:   ")
+    call append(line(".")+4,"**********************************************/")
+endf
+nmap <F4> <Esc>:call Mytitle()<CR><Esc>:$<Esc>o   
