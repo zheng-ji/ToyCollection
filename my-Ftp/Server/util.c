@@ -12,10 +12,11 @@ void ack_err(int net_cmd_sock) {
 	send(net_cmd_sock, ack, strlen(ack), 0);
 }
 
-void close_svr(int net_cmd_sock) {
+void close_svr(int net_cmd_sock, int net_data_sock) {
 	ack_succ(net_cmd_sock);
 	sleep(2);
 	close(net_cmd_sock);
+	close(net_data_sock);
 	printf("close server\n");
 }
 
