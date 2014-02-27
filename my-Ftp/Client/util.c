@@ -112,6 +112,8 @@ void recv_dir_info(char *cmd) {
 	} else {
 		printf("Server return error!\n");
 	}
+    char tmp[128];
+    read(data_socket, tmp, 128);
 }
 
 void warn () {

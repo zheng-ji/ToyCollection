@@ -40,6 +40,7 @@ static void handle_request(int net_cmd_sock) {
                 n = read(net_cmd_sock, buf, 128); //不用recv ,继续read
                 buf[n] = '\0';
                 char *filename = buf + 1; //去除1个空格
+                p = filename;
                 send_file(filename, net_data_sock, net_cmd_sock);
             }
         } else {
@@ -87,19 +88,19 @@ int main(int argc,char * argv[]) {
     }
 
     /*
-    if (fork() != 0)
-        exit(1);
-    if (setsid() < 0)
-        exit(1);
-    if (fork() != 0)
-        exit(1);
-    if (chdir("/tmp") == -1)
-        exit(1);
-    for (int fd = 0, fdtablesize = getdtablesize(); fd < fdtablesize; fd++)
-        close(fd);
+       if (fork() != 0)
+       exit(1);
+       if (setsid() < 0)
+       exit(1);
+       if (fork() != 0)
+       exit(1);
+       if (chdir("/tmp") == -1)
+       exit(1);
+       for (int fd = 0, fdtablesize = getdtablesize(); fd < fdtablesize; fd++)
+       close(fd);
 
-    umask(0);
-    */
+       umask(0);
+       */
 
     handle_connect(svr_cmd_sock);
     return 0;

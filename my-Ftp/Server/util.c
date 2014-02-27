@@ -55,15 +55,16 @@ void send_file(char* filename, int net_data_sock, int net_cmd_sock) {
 		int filesize = get_file_size(filename);
 		char size_str[16];
 		sprintf(size_str, "%d", filesize);
+        printf("filesize:%d \n", filesize);
 
 		long total_buf_len = strlen(size_str) + 1 + filesize;//需要发送数据位数，空格，数据
 		char buf[total_buf_len];
 		strcpy(buf,size_str);
-		buf[strlen(size_str)]=' ';
+		buf[strlen(size_str)] = ' ';
 
 		int length = read(fp,buf + strlen(size_str) + 1,filesize);
 		close(fp);
-		if(length < 0){
+		if (length < 0){
 			printf("read file error!\n");
 			return ;
 		} else {
