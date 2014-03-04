@@ -8,8 +8,8 @@ void CTask::SetData(void *data) {
 }
 
 vector<pthread_t> CThreadPool::m_vecBusyThread;
-vector<pthread_t> CThreadPool::m_vecIdcThread;
-pthread_mutex_t CThreadPool::pthreadMutex = PTHREAD_MUTEX_INITIALIZER;
+vector<pthread_t> CThreadPool::m_vecIdleThread;
+pthread_mutex_t CThreadPool::m_pthreadMutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t CThreadPool::m_pthreadCond = PTHREAD_COND_INITIALIZER;
 
 
@@ -31,7 +31,7 @@ int CThreadPool::MoveToIdle(pthread_t tid) {
 	return 0;
 }
 
-int CThreadPool::MoveTOBusy(pthread_t tid) {
+int CThreadPool::MoveToBusy(pthread_t tid) {
 	vector<pthread_t>::iterator idleIter = m_vecIdleThread.begin();
 	while(idleIter != m_vecIdleThread.end()) {
 		if (tid == *idleIter) {
@@ -52,15 +52,15 @@ void* CThreadPool::ThreadFunc(void *threadData) {
 		cout << "tid: " << tid << "run " << endl; 
 		vector<CTask*>* tasklist = (vector<CTask*>*) threadData;
 		vector<CTask*>::iterator iter = tasklist->begin();
-		while(iter != taskList->end()) {
+		while(iter != tasklist->end()) {
 			MoveToBusy(tid);
 			break;
 		}
 		CTask *task = *iter;
 		tasklist->erase(iter);
 		pthread_mutex_unlock(&m_pthreadMutex);
-		cout << "idel thread number:" << CThreadPool::m_vecIdcThread/size() << endl;
-		cout << "busy thread number:" << CThreadPool::m_vecBusyThread.size() >> endl;
+		cout << "idel thread number:" << CThreadPool::m_vecIdleThread.size() << endl;
+		cout << "busy thread number:" << CThreadPool::m_vecBusyThread.size() << endl;
 		task->Run();
 		cout << "tid:" << tid << " idle" << endl;
 	}

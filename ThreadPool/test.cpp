@@ -17,7 +17,7 @@ int main () {
 	CWorkTask taskObj;
 	char szTmp[] = "this is the first thread running.";
 	taskObj.SetData((void *) szTmp);
-	CThreadPool threadpool(10);
+	CThreadPool threadPool(10);
 	for (int i = 0; i < 11; i++) {
 		threadPool.AddTask(&taskObj);
 	}

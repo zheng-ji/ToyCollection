@@ -31,7 +31,7 @@ class CThreadPool
 		static pthread_cond_t m_pthreadCond;
 	protected:
 		static void* ThreadFunc(void *threadData);
-		static int MovedToIdle(pthread_t tid);
+		static int MoveToIdle(pthread_t tid);
 		static int MoveToBusy(pthread_t tid);
 		int Create();
 	public:
