@@ -13,8 +13,9 @@ set history=50              " keep 50 lines of command line history
 set ruler                   " show the cursor position all the time
 set autoread
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
 
 if &term=="xterm"
@@ -121,24 +122,33 @@ execute pathogen#infect()
 let g:solarized_termtrans = 1
 colorscheme darkburn
 set t_Co=256
+" 调用F7 做 pep8 检查, 在此之前要pip install flake8
+let g:pyflakes_use_quickfix = 0
+let g:flake8_max_line_length=99
 
 
 
 "My Bundles here:
 " Syntax
 Bundle 'python.vim--Vasiliev'
-Bundle 'xml.vim'
-Plugin 'faith/vim-go'
-Bundle 'html5.vim'
-Bundle 'JavaScript-syntax'
-Bundle 'asciidoc.vim'
+Bundle 'syntastic'
+"Bundle 'xml.vim'
+"Bundle 'asciidoc.vim'
+"Plugin 'fatih/vim-go'
+Bundle 'cespare/vim-golang'
+Bundle 'dgryski/vim-godef'
+Bundle 'Blackrush/vim-gocode'
+Bundle 'majutsushi/tagbar'
+Bundle 'nvie/vim-flake8'
+" compiler plugin for python style checking tool.
+Bundle 'vim-scripts/pylint.vim'
+autocmd FileType python compiler pylint
 
 " Color
 Bundle 'darkburn'
 
 " Ftplugin
-Bundle 'python_fold'
-Bundle 'Javascript-Indentation'
+"Bundle 'python_fold'
 
 " Indent
 Bundle 'gg/python.vim'
@@ -146,3 +156,4 @@ Bundle 'gg/python.vim'
 " Plugin
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
+call vundle#end()
