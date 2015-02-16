@@ -1,8 +1,11 @@
-一些有趣的代码和配置
+一些有趣的
+
+* 代码
+* 配置
 
 ```
-|+ac_automation/  ac自动机
-|+BinaryTree/     二叉树
+|+ac_automation/  ac自动机算法
+|+BinaryTree/     二叉树结构运算
 |+chatRoom/       c++写的聊天室
 |+ExternSort/     一道外部排序的题目
 |+go-trie/        golang写的前缀树 
@@ -15,6 +18,7 @@
 |+LinkList/        链表
 |+my-Ftp/          c实现的ftp服务器
 |+my-vim-setting/  我的vim配置
+|+ping-tool/       gevent的ping 测试工具
 |+pychatRoom/     
 |+PyHp-ext/
 |+Search/          BFS/ DFS深度搜索，广度搜索
