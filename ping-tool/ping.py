@@ -1,11 +1,12 @@
 import subprocess
 import re
 import gevent
+
+
 class Ping():
 
     def __init__(self):
         pass
-
 
     def run(self):
         gevent.joinall([
@@ -24,10 +25,8 @@ class Ping():
             print "server %s error: %s" % (server, er)
 
     def check_result(self, result_text, server):
-        #print "here :%s" % result_text
         lost_re = re.compile(r'(\d{1,3}\.\d{1,3})% packet loss')
         lost_result = lost_re.search(result_text)
-        #print "there :%s" % lost_result
         if lost_result:
             if lost_result.group(1) == '0.0':
                 avg_re = re.compile(r'\/(\d{1,3}\.\d{3})')
