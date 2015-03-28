@@ -118,40 +118,29 @@ let NERDTreeWinPos = "left"
 let NERDTreeWinSize = 31
 
 nmap <F3> <ESC>:NERDTreeToggle<RETURN>
+nmap <F8> :TagbarToggle<CR>
 execute pathogen#infect()
 let g:solarized_termtrans = 1
 colorscheme darkburn
 set t_Co=256
 " 调用F7 做 pep8 检查, 在此之前要pip install flake8
 let g:pyflakes_use_quickfix = 0
-let g:flake8_max_line_length=99
-
+let g:flake8_max_line_length = 99
 
 
 "My Bundles here:
 " Syntax
-Bundle 'python.vim--Vasiliev'
 Bundle 'syntastic'
-"Bundle 'xml.vim'
-"Bundle 'asciidoc.vim'
-"Plugin 'fatih/vim-go'
-Bundle 'cespare/vim-golang'
-Bundle 'dgryski/vim-godef'
-Bundle 'Blackrush/vim-gocode'
+Plugin 'fatih/vim-go'
 Bundle 'majutsushi/tagbar'
 Bundle 'nvie/vim-flake8'
+Bundle 'davidhalter/jedi-vim'
 " compiler plugin for python style checking tool.
 Bundle 'vim-scripts/pylint.vim'
 autocmd FileType python compiler pylint
 
 " Color
 Bundle 'darkburn'
-
-" Ftplugin
-"Bundle 'python_fold'
-
-" Indent
-Bundle 'gg/python.vim'
 
 " Plugin
 Bundle 'The-NERD-tree'
