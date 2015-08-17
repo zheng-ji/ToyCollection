@@ -1,0 +1,31 @@
+- name: install ppa
+  shell: add-apt-repository -y ppa:vbernat/haproxy-1.5
+  sudo: yes
+  tags:
+    - install
+
+- name: update package list
+  shell: apt-get update
+  sudo: yes
+  tags:
+    - install
+
+- name: install haproxy
+  shell: apt-get install -y haproxy
+  sudo: yes
+  tags:
+    - install
+
+- name: copy haproxy conf
+  copy: src=haproxy.cfg dest=/etc/haproxy/haproxy.cfg owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: restart haproxy
+  shell: service haproxy restart
+  sudo: yes
+  tags:
+    - install
+    - update

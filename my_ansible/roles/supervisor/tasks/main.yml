@@ -1,0 +1,57 @@
+- name: create ip2loc2 folder
+  file: path=/home/ymserver/bin/ip2loc2 state=directory mode=755 owner=ymserver group=ymserver
+  sudo: yes
+  tags: 
+    - install
+
+- name: create ip2loc2 etc folder
+  file: path=/home/ymserver/bin/ip2loc2/etc state=directory mode=755 owner=ymserver group=ymserver
+  sudo: yes
+  tags: 
+    - install
+
+- name: create ip2loc log folder
+  file: path=/home/ymserver/log/ip2loc state=directory mode=777 owner=ymserver group=ymserver
+  sudo: yes
+  tags: 
+    - install
+
+- name: copy new ip2loc
+  copy: src=ip2loc dest=/home/ymserver/bin/ip2loc2/ip2loc owner=ymserver group=ymserver mode=0755
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy ip2loc2 log config
+  copy: src=etc/logger.xml dest=/home/ymserver/bin/ip2loc2/etc/logger.xml owner=ymserver group=ymserver mode=0755
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy ip2loc2 config
+  copy: src=etc/config.yaml dest=/home/ymserver/bin/ip2loc2/etc/config.yaml owner=ymserver group=ymserver mode=0755
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy ip2loc2 init conf
+  copy: src=ip2loc2.conf dest=/etc/init/ip2loc2.conf owner=root group=root mode=644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: start ip2loc2
+  shell: start ip2loc2
+  sudo: yes
+  tags:
+    - install
+
+- name: restart ip2loc2
+  shell: restart ip2loc2
+  sudo: yes
+  tags:
+    - update

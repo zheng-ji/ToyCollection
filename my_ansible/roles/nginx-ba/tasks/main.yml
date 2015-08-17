@@ -1,0 +1,55 @@
+- name: copy nginx conf
+  copy: src=nginx.conf dest=/etc/nginx/nginx.conf owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy deny_robot_favicon
+  copy: src=deny_robot_favicon dest=/etc/nginx/deny_robot_favicon owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy proxy_params
+  copy: src=proxy_params dest=/etc/nginx/proxy_params owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy proxy_params_without_host
+  copy: src=proxy_params_without_host dest=/etc/nginx/proxy_params_without_host owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy conf.d
+  copy: src=conf.d dest=/etc/nginx/ owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: copy sites-enabled
+  copy: src=sites-enabled dest=/etc/nginx/ owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: test nginx config
+  shell: nginx -t
+  sudo: yes
+  tags:
+    - install
+    - update
+
+- name: nginx reload config
+  shell: nginx -s reload
+  sudo: yes
+  tags:
+    - install
+    - update

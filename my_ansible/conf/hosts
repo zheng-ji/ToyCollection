@@ -1,0 +1,19 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+
+
+[redis-cluster]
+172.31.20.50 ansible_ssh_port=36000 ansible_ssh_user=zj
+172.31.20.51 ansible_ssh_port=36000 ansible_ssh_user=zj
+172.31.20.52 ansible_ssh_port=36000 ansible_ssh_user=zj
+172.31.20.53 ansible_ssh_port=36000 ansible_ssh_user=zj

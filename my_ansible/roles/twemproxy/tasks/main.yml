@@ -1,0 +1,54 @@
+- name: create twemproxy folder
+  file: path=/home/ymserver/bin/twemproxy state=directory mode=755 owner=ymserver group=ymserver
+  sudo: yes
+  tags:
+    - install
+
+- name: create twemproxy bin folder
+  file: path=/home/ymserver/bin/twemproxy/bin state=directory mode=755 owner=ymserver group=ymserver
+  sudo: yes
+  tags:
+    - install
+
+- name: create twemproxy etc folder
+  file: path=/home/ymserver/bin/twemproxy/etc state=directory mode=755 owner=ymserver group=ymserver
+  sudo: yes
+  tags:
+    - install
+
+- name: create twemproxy log folder
+  file: path=/home/ymserver/log/twemproxy state=directory mode=755 owner=ymserver group=ymserver
+  sudo: yes
+  tags:
+    - install
+
+- name: copy twemproxy conf
+  copy: src=etc/nutcracker.yml dest=/home/ymserver/bin/twemproxy/etc/nutcracker.yml owner=ymserver group=ymserver mode=0644
+  sudo: yes
+  tags:
+    - install
+
+- name: copy twemproxy bin
+  copy: src=bin/nutcracker dest=/home/ymserver/bin/twemproxy/bin/nutcracker owner=ymserver group=ymserver mode=0775
+  sudo: yes
+  tags:
+    - install
+
+- name: copy twemproxy supervisor conf
+  copy: src=twemproxy.conf dest=/etc/supervisor/conf.d/twemproxy.conf owner=root group=root mode=0644
+  sudo: yes
+  tags:
+    - install
+
+- name: update twemproxy
+  shell: supervisorctl update twemproxy
+  sudo: yes
+  tags:
+    - install
+
+- name: restart twemproxy
+  shell: supervisorctl restart twemproxy
+  sudo: yes
+  tags:
+    - install
+    - update

@@ -1,0 +1,56 @@
+server
+{
+	listen  80;
+	server_name  r.youmi.net r.yyapi.net;
+	include deny_robot_favicon;
+	error_log /home/ymserver/log/nginx/r-youmi.error.log;
+	access_log /home/ymserver/log/nginx/r-youmi.access.log access_format ratio=0.001;
+
+	# Ocdiy
+	location /ocdiy {
+		return 403;
+#		proxy_pass         http://gateway-servers;
+#		include proxy_params;
+	}
+
+        # Spot
+        location /spot {
+		# deny 58.63.244.77;
+		# deny 58.63.244.64;
+
+                set $ym_cid ".$http_x_ym_cid";
+                if ($ym_cid = ".") {
+                        proxy_pass         http://gateway-spot-without-cid-servers;
+                }
+                if ($ym_cid != ".") {
+                        proxy_pass         http://gateway-spot-servers;
+                }
+                include proxy_params;
+        }
+
+        location /popup {
+		return 403;
+#		proxy_pass         http://gateway-newproj-servers;
+#		include proxy_params;
+        }
+
+	# Umec V1
+	location /umec {
+		return 403;
+	}
+
+	# Video
+	location /video {
+		return 403;
+
+#		set $ym_cid ".$http_x_ym_cid$http_x_ym_cd";
+#		if ($ym_cid = ".") {
+#			proxy_pass         http://gateway-newproj-servers;
+#		}
+#		if ($ym_cid != ".") {
+#			proxy_pass         http://gateway-video-servers;
+#		}
+#
+#                include proxy_params;
+	}
+}

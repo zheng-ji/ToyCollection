@@ -1,0 +1,8 @@
+# tags: install update
+#
+# install: --tags "install"
+# update:  --tags "update"
+
+- hosts: ba
+  roles:
+      - nginx-ba

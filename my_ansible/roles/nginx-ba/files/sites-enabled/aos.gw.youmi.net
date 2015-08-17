@@ -1,0 +1,32 @@
+server
+{
+	listen  80;
+	server_name  aos.gw.youmi.net;
+	include deny_robot_favicon;
+	access_log /home/ymserver/log/nginx/aos-gw.access.log access_format ratio=0.001;
+
+	# Banner V4
+	location /banner/v4 {
+		return 403;
+	}
+
+	# Spot V2
+	location /spot/v2 {
+		proxy_pass         http://gateway-servers;
+		include proxy_params;
+	}
+
+	location /ocdiy/v1 {
+		return 403;
+	}
+
+	# Wall
+	location /br/v3i {
+		return 403;
+	}
+
+	# Banner
+	location / {
+		return 403;
+	}
+}

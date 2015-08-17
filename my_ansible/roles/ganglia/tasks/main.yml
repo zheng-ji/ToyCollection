@@ -1,0 +1,23 @@
+- name: copy cpasvr.pyconf config
+  copy: src=./cpasvr.pyconf dest=/etc/ganglia/conf.d/cpasvr.pyconf owner=root group=root mode=644
+  sudo: yes
+  tags:
+    - install
+
+- name: copy cpasvr.py
+  copy: src=./cpasvr.py dest=/usr/lib/ganglia/python_modules/cpasvr.py owner=root group=root mode=755
+  sudo: yes
+  tags:
+    - install
+
+- name: pip install requests
+  shell: pip install requests
+  sudo: yes
+  tags:
+    - install
+
+- name: restart ganglia
+  shell: service ganglia-monitor restart
+  sudo: yes
+  tags:
+    - install

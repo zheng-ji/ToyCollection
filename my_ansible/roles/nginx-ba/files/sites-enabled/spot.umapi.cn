@@ -1,0 +1,41 @@
+server
+{
+	listen  80;
+	server_name  ios.spot.umapi.cn;
+	include deny_robot_favicon;
+	error_log /home/ymserver/log/nginx/ios-spot.error.log;
+	access_log /home/ymserver/log/nginx/ios-spot.access.log access_format ratio=0.001;
+
+        # Spot
+        location / {
+                set $ym_cid ".$http_x_ym_cid";
+                if ($ym_cid = ".") {
+                        proxy_pass         http://gateway-spot-without-cid-servers;
+                }
+                if ($ym_cid != ".") {
+                        proxy_pass         http://gateway-spot-servers;
+                }
+                include proxy_params;
+        }
+}
+
+server
+{
+	listen  80;
+	server_name  aos.spot.umapi.cn;
+	include deny_robot_favicon;
+	error_log /home/ymserver/log/nginx/aos-spot.error.log;
+	access_log /home/ymserver/log/nginx/aos-spot.access.log access_format ratio=0.001;
+
+        # Spot
+        location / {
+                set $ym_cid ".$http_x_ym_cid";
+                if ($ym_cid = ".") {
+                        proxy_pass         http://gateway-spot-without-cid-servers;
+                }
+                if ($ym_cid != ".") {
+                        proxy_pass         http://gateway-spot-servers;
+                }
+                include proxy_params;
+        }
+}

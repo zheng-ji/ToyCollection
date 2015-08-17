@@ -1,0 +1,12 @@
+server
+{
+        listen  80;
+        server_name  stat.gw.youmi.net;
+        include deny_robot_favicon;
+	error_log /home/ymserver/log/nginx/gw-stat.error.log;
+	access_log /home/ymserver/log/nginx/gw-stat.access.log access_format ratio=0.001;
+        location / {
+                proxy_pass         http://gateway-servers;
+                include proxy_params;
+	}
+}

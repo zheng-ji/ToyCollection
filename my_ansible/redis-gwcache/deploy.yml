@@ -1,0 +1,8 @@
+# tags: install update
+#
+# install: --tags "install"
+# update:  --tags "update"
+
+- hosts: redis-cluster
+  roles:
+      - redis-gwcache

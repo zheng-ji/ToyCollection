@@ -1,0 +1,7 @@
+- name: start ip2loc2
+  shell: start ip2loc2
+  sudo: yes
+
+- name: restart ip2loc2
+  shell: restart ip2loc2
+  sudo: yes

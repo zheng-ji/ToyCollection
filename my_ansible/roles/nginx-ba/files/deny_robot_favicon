@@ -1,0 +1,13 @@
+location = /robots.txt {
+	log_not_found  off;
+	return 404;
+}
+location = /favicon.ico {
+	log_not_found  off;
+	return 404;
+}
+location ~ /\. {
+	log_not_found  off;
+	return 404;
+	#deny all;
+}

@@ -1,0 +1,27 @@
+#server {
+#	listen 80;
+#	server_name test.yyapi.net;
+#	include deny_robot_favicon;
+#
+#	access_log off;
+#
+#	# 获取正确的客户端IP
+#	# http://www.jayway.com/2014/03/28/how-to-get-the-client-ip-when-using-cloudfront-and-nginx/
+#	# http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/LocationsOfEdgeServers.html
+#
+#	location / {
+#
+#		set $mark ".$http_x_ym_cid$http_x_ym_cd";
+#		if ($mark = ".") {
+#			echo "no cid at all";
+#			proxy_pass         http://gateway-wall-servers;
+#		}
+#		if ($mark != ".") {
+#			proxy_pass         http://gateway-test-servers;
+#			echo "mark is: $mark";
+#		}
+#
+#		proxy_set_header   Host		global.yyapi.net;
+#		include proxy_params_without_host;
+#	}
+#}

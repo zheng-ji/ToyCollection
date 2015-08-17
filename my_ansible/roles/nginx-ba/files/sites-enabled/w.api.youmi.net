@@ -1,0 +1,12 @@
+server {
+	listen 80;
+	server_name w.api.youmi.net
+	include deny_robot_favicon;
+        error_log /home/ymserver/log/nginx/w.api.youmi.error.log;
+        access_log /home/ymserver/log/nginx/w.api.youmi.access.log access_format ratio=0.001;
+	
+	location / {
+		proxy_pass	http://gateway-servers;
+		include		proxy_params;
+	}
+}

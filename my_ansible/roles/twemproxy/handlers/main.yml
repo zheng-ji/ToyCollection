@@ -1,0 +1,3 @@
+- name: restart twemproxy
+  shell: service supervisorctl restart twemproxy
+  sudo: yes

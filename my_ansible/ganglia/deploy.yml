@@ -1,0 +1,8 @@
+# tags: install update
+#
+# install: --tags "install"
+# update:  --tags "update"
+
+- hosts: adm-gw1:adm-gw2:log
+  roles:
+      - ganglia

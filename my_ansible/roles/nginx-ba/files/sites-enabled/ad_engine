@@ -1,0 +1,14 @@
+server {
+	listen 80;
+	server_name eng.aws.y.cn;
+	include deny_robot_favicon;
+
+        access_log /home/ymserver/log/nginx/engine.access.log access_format ratio=0.001;
+	error_log /home/ymserver/log/nginx/engine.error.log;
+
+	location / {
+		proxy_pass         http://gateway-engine-servers;
+		include proxy_params;
+	}
+
+}

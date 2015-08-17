@@ -1,0 +1,25 @@
+alpha:
+    listen: 127.0.0.1:6700
+    hash: fnv1a_64
+    distribution: ketama
+    auto_eject_hosts: true
+    redis: true
+    server_retry_timeout: 30000
+    server_failure_limit: 3
+    servers:
+        - 172.31.20.50:6700:1 master0
+        - 172.31.20.50:6701:1 master1
+        - 172.31.20.50:6702:1 master2
+        - 172.31.20.50:6703:1 master3
+        - 172.31.20.51:6700:1 master4
+        - 172.31.20.51:6701:1 master5
+        - 172.31.20.51:6702:1 master6
+        - 172.31.20.51:6703:1 master7
+        - 172.31.20.52:6700:1 master8
+        - 172.31.20.52:6701:1 master9
+        - 172.31.20.52:6702:1 master10
+        - 172.31.20.52:6703:1 master11
+        - 172.31.20.53:6700:1 master12
+        - 172.31.20.53:6701:1 master13
+        - 172.31.20.53:6702:1 master14
+        - 172.31.20.53:6703:1 master15

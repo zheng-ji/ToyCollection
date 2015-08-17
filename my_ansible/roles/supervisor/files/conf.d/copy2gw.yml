@@ -1,0 +1,7 @@
+- hosts: adm-gw1:adm-gw2
+  tasks:
+  - copy: src=./adnow.conf dest=/etc/supervisor/conf.d/adnow.conf owner=root group=root mode=0644
+    sudo: yes
+  
+  - shell: supervisorctl reread
+    sudo: yes

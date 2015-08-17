@@ -1,0 +1,7 @@
+- name: test nginx config
+  shell: nginx -t
+  sudo: yes
+
+- name: nginx reload config
+  shell: nginx -s reload
+  sudo: yes
