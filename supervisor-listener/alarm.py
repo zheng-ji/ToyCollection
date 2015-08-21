@@ -16,7 +16,7 @@ class EventAlarm():
 
         self.logger = logging.getLogger()
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-        hdlr = logging.FileHandler("/home/ymserver/log/supervisor/alarm.log")
+        hdlr = logging.FileHandler("/home/zj/log/supervisor/alarm.log")
         hdlr.setFormatter(formatter)
         self.logger.addHandler(hdlr)
         self.logger.setLevel(logging.INFO)
@@ -63,8 +63,8 @@ class EventAlarm():
             conn = httplib.HTTPSConnection("api.pushover.net:443")
             conn.request("POST", "/1/messages.json",
                          urllib.urlencode({
-                             "token": "aEC1fLFf4jspyXis2q2XAPMF5ReWM6",
-                             "user": "unpU2QPBjwte39Gd1tScyrciGysXXc",
+                             "token": "xxx",
+                             "user": "xxxx",
                              "message": self.build_msg(headers),
                              "priority": priority,
                              "title": 'Supervisor 监控报警',
