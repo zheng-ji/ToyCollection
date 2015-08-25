@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#  Author:   zheng-ji@youmi.net
+#  Author:   zhengji@youmi.net
 
 import sys
 import httplib
@@ -16,7 +16,7 @@ class EventAlarm():
 
         self.logger = logging.getLogger()
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-        hdlr = logging.FileHandler("/home/zj/log/supervisor/alarm.log")
+        hdlr = logging.FileHandler("/home/ymserver/log/supervisor/alarm.log")
         hdlr.setFormatter(formatter)
         self.logger.addHandler(hdlr)
         self.logger.setLevel(logging.INFO)
@@ -37,7 +37,11 @@ class EventAlarm():
 
     def build_msg(self, headers):
         if headers['eventname'] == 'PROCESS_STATE_FATAL':
-            status = 'FATL'
+            status = 'FATAL'
+        elif headers['eventname'] == 'PROCESS_STATE_STOPPED':
+            status = 'STOPPED'
+        elif headers['eventname'] == 'PROCESS_STATE_EXITED':
+            status = 'EXITED'
         else:
             status = 'OK'
 
@@ -63,8 +67,8 @@ class EventAlarm():
             conn = httplib.HTTPSConnection("api.pushover.net:443")
             conn.request("POST", "/1/messages.json",
                          urllib.urlencode({
-                             "token": "xxx",
-                             "user": "xxxx",
+                             "token": "af8z8Ex5eXdKnzFoJQtW1DKcAdg6qe",
+                             "user": "gKfsUu8b9cxMEioGAovojhmcy5gXXC",
                              "message": self.build_msg(headers),
                              "priority": priority,
                              "title": 'Supervisor 监控报警',
