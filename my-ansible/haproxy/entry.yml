@@ -3,6 +3,6 @@
 # install: --tags "install"
 # update:  --tags "update"
 
-- hosts: jcx-gw-18:jcx-gw-19
+- hosts: redis-cluster
   roles:
       - haproxy

@@ -13,7 +13,5 @@
 
 
 [redis-cluster]
-172.31.20.50 ansible_ssh_port=36000 ansible_ssh_user=zj
-172.31.20.51 ansible_ssh_port=36000 ansible_ssh_user=zj
-172.31.20.52 ansible_ssh_port=36000 ansible_ssh_user=zj
-172.31.20.53 ansible_ssh_port=36000 ansible_ssh_user=zj
+<Your-Node1-IP> ansible_ssh_port=<Your-Port> ansible_ssh_user=zj
+<Your-Node2-IP> ansible_ssh_port=<Your-Port> ansible_ssh_user=zj
