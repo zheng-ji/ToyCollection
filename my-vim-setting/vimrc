@@ -122,6 +122,8 @@ nmap <F8> :TagbarToggle<CR>
 execute pathogen#infect()
 let g:solarized_termtrans = 1
 colorscheme darkburn
+"colorscheme molokai
+let g:rehash256 = 1
 set t_Co=256
 " 调用F7 做 pep8 检查, 在此之前要pip install flake8
 let g:pyflakes_use_quickfix = 0
@@ -151,6 +153,7 @@ autocmd FileType python compiler pylint
 
 " Color
 Bundle 'darkburn'
+Bundle 'molokai'
 
 " Plugin
 Bundle 'The-NERD-tree'
