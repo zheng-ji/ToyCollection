@@ -26,7 +26,7 @@ class Phone(object):
     def get_phone_dat_msg(self):
         print "version:{}".format(self.version)
         print "第一条索引偏移:{}".format(self.first_phone_record_offset)
-        print "记录内容:{}".format(self.buf[8:61811])
+        #print "记录内容:{}".format(self.buf[8:61811])
         print "版本号:{}".format(self.version)
         print "总记录条数:{}".format(self.phone_record_count)
 
@@ -99,8 +99,9 @@ class Phone(object):
     def test(self):
         self.get_phone_dat_msg()
 
-        for i in xrange(1529900, 1529999):
-            pass
+        print self.human_phone_info(self.find(15813581745))
+        #for i in xrange(1529900, 1529999):
+            #pass
             #print self.human_phone_info(self.find(i))
 
 if __name__ == "__main__":
