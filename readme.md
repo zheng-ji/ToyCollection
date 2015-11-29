@@ -8,6 +8,7 @@
 |+benchmarks/     压力测试工具
 |+BinaryTree/     二叉树结构运算
 |+chatRoom/       c++写的聊天室
+|+celery_proj/    celery  的 Demo 使用
 |+ExternSort/     一道外部排序的题目
 |+go-trie/        golang写的前缀树 
 |+Hash/           一种哈希实现
