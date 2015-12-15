@@ -9,16 +9,8 @@ concurrent = 300
 limit = 900
 if __name__ == '__main__':
 
-    def work():
+
+    for x in range(100):
         print add.apply_async(args=(3, 4, ), queue='test')
 
-    count = 0
-    while True:
-        threads = []
-        for i in range(concurrent):
-            threads.append(gevent.spawn(work))
-        gevent.joinall(threads)
-        count += concurrent
-        if limit is not None and count >= limit:
-            break
     print "over"

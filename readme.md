@@ -34,7 +34,7 @@
 |+go-data-structure/ golang 数据结构
 |+supervisor-listener/ supervisor 监听程序，用于观测程序启动或停止
 |+goTcpProxy/       golang Tcp proxy
-|+docker-example/   一个完整的docker 镜像，意在学习整个过程
+|+docker-example/   一个完整的 docker 镜像，意在学习整个过程
 
 ```
 
