@@ -6,9 +6,13 @@ from kombu import Queue, Exchange
 
 app = distribute.app
 app.conf.update(
-    CELERY_QUEUES=(
-        Queue('test', Exchange('test_exchange'), routing_key='test_queue'),
-    ),
+    CELERYBEAT_SCHEDULE = {
+        'every-minute': {
+            'task': 'test_cron',
+            'schedule': crontab(minute="*"),
+            'args': (16, 13),
+        }
+    },
     CELERY_INCLUDE=("apps.tasks",),
     BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 60*60*5},
 )

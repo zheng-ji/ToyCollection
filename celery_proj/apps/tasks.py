@@ -22,8 +22,9 @@ def add(x, y):
     return x + y
 
 
-@app.task
+@app.task(name="test_cron")
 def mul(x, y):
+    logger.info("ok")
     return x * y
 
 

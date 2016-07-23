@@ -9,3 +9,11 @@ python backend.py worker -Q test -l info
 ```
 python test.py
 ```
+
+----
+
+* 执行crontab
+
+```
+python crontab.py worker -B -l info
+```
