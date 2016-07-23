@@ -15,5 +15,5 @@ python test.py
 * 执行crontab
 
 ```
-python crontab.py worker -B -l info
+python crontab.py worker --beat -l info
 ```
