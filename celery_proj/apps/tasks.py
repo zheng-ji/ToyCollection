@@ -8,7 +8,7 @@ logger = logging.getLogger("watcher")
 logger.setLevel(logging.INFO)
 log_format = "[%(asctime)s] [%(levelname)s] %(message)s"
 log_time_format = "%Y-%m-%d %H:%M:%S"
-fh = logging.FileHandler("/home/zj/log/celery-worker.log")
+fh = logging.FileHandler("/tmp/celery-worker.log")
 formatter = logging.Formatter(log_format, log_time_format)
 fh.setFormatter(formatter)
 logger.addHandler(fh)
@@ -22,8 +22,9 @@ def add(x, y):
     return x + y
 
 
-@app.task
+@app.task(name='test_cron')
 def mul(x, y):
+    logger.info("hello world")
     return x * y
 
 
