@@ -3,14 +3,9 @@
 from lib import distribute
 from celery.schedules import crontab
 from kombu import Queue, Exchange
-from celery.schedules import crontab
 
 app = distribute.app
 app.conf.update(
-    CELERY_INCLUDE=("apps.tasks",),
-    CELERY_QUEUES=(
-        Queue('test', Exchange('test_exchange'), routing_key='test_queue'),
-    ),
     CELERYBEAT_SCHEDULE = {
         'every-minute': {
             'task': 'test_cron',
@@ -18,6 +13,7 @@ app.conf.update(
             'args': (16, 13),
         }
     },
+    CELERY_INCLUDE=("apps.tasks",),
     BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 60*60*5},
 )
 

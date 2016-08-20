@@ -21,12 +21,10 @@ def add(x, y):
     logger.info(r.text[2:10])
     return x + y
 
-
-@app.task(name='test_cron')
+@app.task(name="test_cron")
 def mul(x, y):
-    logger.info("hello world")
+    logger.info("ok")
     return x * y
-
 
 @app.task
 def xsum(numbers):
