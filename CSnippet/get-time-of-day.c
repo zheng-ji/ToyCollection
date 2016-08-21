@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <sys/time.h>
-//#include <time.h>
 
 int main () {
-
     char buf[1024];
     long sec;
     struct timeval tv;
