@@ -4,12 +4,12 @@
 
 2. EPOLL API操作
 
-* int epoll_create(int size) 创建 epoll 上下文，size 告诉内核需要监听的文件描述符的数目。
-* epoll_ctl() 向指定的epoll上下文中加入或者删除，修改文件描述符。
-* epoll_wait() 等待给定epoll实例关联的文件描述符上事件，时限为 timeout 毫秒，成功返回，且最多有多个 maxevents
-* data 是用户使用，确定监听事件后，data 会返回给用户，通常将event.data.fd设定为fd， 这样就知道那个文件描述符触发时间。
-* OP 是要指定的操作
-* EVENT 订阅的事件
+2.1 int epoll_create(int size) 创建 epoll 上下文，size 告诉内核需要监听的文件描述符的数目。
+2.2 epoll_ctl() 向指定的epoll上下文中加入或者删除，修改文件描述符。
+2.3 epoll_wait() 等待给定epoll实例关联的文件描述符上事件，时限为 timeout 毫秒，成功返回，且最多有多个 maxevents
+2.4 data 是用户使用，确定监听事件后，data 会返回给用户，通常将event.data.fd设定为fd， 这样就知道那个文件描述符触发时间。
+2.5 OP 是要指定的操作
+2.6 EVENT 订阅的事件
 
 ```
 #include<sys/epoll.h>
