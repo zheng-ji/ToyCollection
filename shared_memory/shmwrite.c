@@ -22,6 +22,15 @@ int main() {
 
     //创建信号量
     sem_id = semget(SEM_KEY, 1, 0666 | IPC_CREAT);
+    if (sem_id == -1) {
+        if (errno == EEXIST) {
+            sem_id = semget(SEM_KEY, 1, 0666);
+            if (sem_id == -1) {
+                fprintf(stderr, "semget failed\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
 
     if (!set_semvalue(sem_id)) {
         fprintf(stderr, "Failed to initialize semaphore\n");
@@ -34,8 +43,13 @@ int main() {
     //创建共享内存
     shmid = shmget(MY_KEY, sizeof(struct shared_msg), 0666|IPC_CREAT);
     if (shmid == -1) {
-        fprintf(stderr, "shmget failed\n");
-        exit(EXIT_FAILURE);
+        if (errno == EEXIST) {
+            shmid = shmget(MY_KEY, sizeof(struct shared_msg), 0666);
+            if (shmid == -1)  {
+                fprintf(stderr, "shmget failed\n");
+                exit(EXIT_FAILURE);
+            }
+        }
     }
 
     //将共享内存连接到当前进程的地址空间

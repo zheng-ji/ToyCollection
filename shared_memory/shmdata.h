@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sys/sem.h>
 #include <sys/types.h>
+#include <errno.h>
 
 #define TEXT_SZ 2048
 
