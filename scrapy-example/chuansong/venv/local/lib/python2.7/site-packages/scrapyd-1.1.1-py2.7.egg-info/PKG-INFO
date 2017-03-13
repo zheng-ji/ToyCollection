@@ -1,0 +1,35 @@
+Metadata-Version: 1.1
+Name: scrapyd
+Version: 1.1.1
+Summary: A service for running Scrapy spiders, with an HTTP API
+Home-page: https://github.com/scrapy/scrapyd
+Author: Scrapy developers
+Author-email: info@scrapy.org
+License: BSD
+Description: =======
+        Scrapyd
+        =======
+        
+        .. image:: https://secure.travis-ci.org/scrapy/scrapyd.png?branch=master
+           :target: http://travis-ci.org/scrapy/scrapyd
+        
+        Scrapyd is a service for running `Scrapy`_ spiders.
+        
+        It allows you to deploy your Scrapy projects and control their spiders using a
+        HTTP JSON API.
+        
+        The documentation (including installation and usage) can be found at:
+        http://scrapyd.readthedocs.org/
+        
+        .. _Scrapy: https://github.com/scrapy/scrapy
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: No Input/Output (Daemon)
+Classifier: Topic :: Internet :: WWW/HTTP

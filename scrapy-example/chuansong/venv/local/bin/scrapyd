@@ -1,0 +1,10 @@
+#!/home/ymserver/tmp/chuansong/venv/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'scrapyd==1.1.1','console_scripts','scrapyd'
+__requires__ = 'scrapyd==1.1.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('scrapyd==1.1.1', 'console_scripts', 'scrapyd')()
+    )
