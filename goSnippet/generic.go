@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// use Vars
 var (
 	ERR_ELEM_EXIST    = errors.New("exists")
 	ERR_ELEM_NT_EXIST = errors.New("not exist")
@@ -63,6 +64,7 @@ func (this *Slice) Remove(elem interface{}) error {
 			if i == len(*this)-1 {
 				*this = (*this)[:i]
 			} else {
+				// append 支持可变变量
 				*this = append((*this)[:i], (*this)[i+1:]...)
 			}
 			found = true
