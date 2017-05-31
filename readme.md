@@ -18,6 +18,7 @@
 |+Level_status/   leveldb的status
 |+libevent/
 |+LinkList/        链表
+|+DList/           双端链表
 |+my-Ftp/          c实现的ftp服务器
 |+my-vim-setting/  我的vim配置
 |+ping-tool/       gevent的ping 测试工具
@@ -31,9 +32,7 @@
 |+ThreadPool/      线程池
 |+unix-sock/       unix_domain socket
 |+websocket/       websocket写的陌生人聊天室
-|+go-data-structure/ golang 数据结构
 |+supervisor-listener/ supervisor 监听程序，用于观测程序启动或停止
-|+goTcpProxy/       golang Tcp proxy
 |+docker-example/   一个完整的 docker 镜像，意在学习整个过程
 
 ```
