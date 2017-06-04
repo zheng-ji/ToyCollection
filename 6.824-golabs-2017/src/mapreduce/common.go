@@ -8,7 +8,22 @@ import (
 // Debugging enabled?
 const debugEnabled = false
 
-// debug() will only print if debugEnabled is true
+/* debug() will only print if debugEnabled is true
+   调用 debug("Reduce %s %v\n", key, e)
+   再举一个例子
+	func sum(nums ...int) {
+		fmt.Print(nums, " ")
+		total := 0
+		for _, num := range nums {
+			total += num
+		}
+		fmt.Println(total)
+	}
+	sum(1, 2) 这个函数可以传入任意数量的整型参数
+	sum(1, 2, 3)
+	nums := []int{1, 2, 3, 4} 传入切片
+	sum(nums...)
+*/
 func debug(format string, a ...interface{}) (n int, err error) {
 	if debugEnabled {
 		n, err = fmt.Printf(format, a...)

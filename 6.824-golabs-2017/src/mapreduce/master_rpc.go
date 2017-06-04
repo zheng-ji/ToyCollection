@@ -34,6 +34,7 @@ func (mr *Master) startRPCServer() {
 	loop:
 		for {
 			select {
+			// 当close(mr.shutdown) 这里就会被处罚
 			case <-mr.shutdown:
 				break loop
 			default:

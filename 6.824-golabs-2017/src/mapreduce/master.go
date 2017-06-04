@@ -12,7 +12,8 @@ import (
 
 // Master holds all the state that the master needs to keep track of.
 type Master struct {
-	sync.Mutex
+	sync.Mutex //匿名参数，表示这个struct 具有sync.Mutex的接口
+	//因此Master 也能调用sync.Mutex的函数. 所以当调用master.Lock()的时候也不足为奇
 
 	address     string
 	doneChannel chan bool
@@ -94,6 +95,7 @@ func (mr *Master) forwardRegistrations(ch chan string) {
 		} else {
 			// wait for Register() to add an entry to workers[]
 			// in response to an RPC from a new worker.
+			// 当mr.newCond.Broadcast()被调用，此处就被唤醒，否则一直阻塞
 			mr.newCond.Wait()
 		}
 		mr.Unlock()
@@ -109,6 +111,7 @@ func Distributed(jobName string, files []string, nreduce int, master string) (mr
 		func(phase jobPhase) {
 			ch := make(chan string)
 			go mr.forwardRegistrations(ch)
+			//任务分配到 已经连接的 worker，
 			schedule(mr.jobName, mr.files, mr.nReduce, phase, ch)
 		},
 		func() {

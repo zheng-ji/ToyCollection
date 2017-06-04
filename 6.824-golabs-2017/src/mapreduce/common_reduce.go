@@ -68,6 +68,7 @@ func doReduce(
 
 	var keys []string
 
+	// 对keys 排序
 	for k, _ := range keyValues {
 		keys = append(keys, k)
 	}
