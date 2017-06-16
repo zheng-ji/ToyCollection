@@ -1,0 +1,14 @@
+*.log
+*.gz
+*.bz2
+*.sql
+*.toml
+*.xml
+*.yaml
+*.zip
+*.pyc
+config.py
+*.sqlite
+ddb2s3
+scheduler.teml.aos
+scheduler.teml.ios
