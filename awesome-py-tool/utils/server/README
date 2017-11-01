@@ -1,0 +1,6 @@
+纯粹的翻译所以写的比较贴近golang的习惯;
+
+使用:
+	修改handle.py文件;
+		添加appkey与appsecret的对应逻辑;
+		添加对应cmd的操作逻辑；
