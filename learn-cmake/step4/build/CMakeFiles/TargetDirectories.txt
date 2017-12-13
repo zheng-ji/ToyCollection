@@ -1,0 +1,2 @@
+/home/zj/tool/c/learn-cmake/step4/build/CMakeFiles/Demo.dir
+/home/zj/tool/c/learn-cmake/step4/build/math/CMakeFiles/MathFunctions.dir
