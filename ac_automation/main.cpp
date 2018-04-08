@@ -1,119 +1,143 @@
-#include<iostream>
-#include<string.h>
-#include<stdio.h>
-using namespace std;
-struct node{
-    int count;
-    struct node *fail;
-    struct node *next[26];
-    node()
-    {
-        fail=NULL;
-        memset(next,NULL,sizeof(next));
-        count=0;
-    }
-}*queue[500005];
-struct node *root;
-char keyword[55],str[1000005];
-void build(char *str)//建立字典树
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <utility>
+using std::string;
+using std::vector;
+using std::pair;
+using std::make_pair;
+
+#define CHAR_SET_SIZE 26
+#define PATTERN_SIZE 300
+#define QUERY_SIZE 3000
+#define QSIZE 300000
+
+struct node
 {
-    struct node *p;
-    p=root;
-    int index;
-    for(;*str!='\0';str++)
-    {
-        index=*str-'a';
-        if(p->next[index]==NULL)
-            p->next[index]=new node;
-        p=p->next[index];
+    node *fail;
+    node *child[CHAR_SET_SIZE];
+    int point;
+    node() {
+        fail = NULL;
+        for (int i = 0; i < CHAR_SET_SIZE; ++i) child[i] = NULL;
+        point = -1;
     }
-    p->count++;
+};
+
+node *Q[QSIZE];
+node *Root;
+
+vector <string> Pattern_Collection;
+
+void Init()
+{
+    Root = new node;
 }
-void AC_tree()//构造失败指针
+
+void Insert(char *s, int num)
 {
-    int f,r,i;
-    struct node *p,*temp;
-    root->fail=NULL;
-    f=0;r=0;
-    queue[r++]=root;
-    while(f!=r)
+    node *p = Root;
+    for (char *c = s; *c != '\0'; ++c)
     {
-        p=queue[f++];
-        for(i=0;i<26;i++)
+        int t = (*c) - 'a';
+        if (p->child[t] == NULL)
         {
-            if(p->next[i]!=NULL)
+            p->child[t] = new node;
+        }
+        p = p->child[t];
+        if ((*(c+1)) == '\0') p->point = num; 
+    }
+}
+void InputPattern()
+{
+    printf("Input number of patterns:");
+    fflush(stdout);
+    int N;
+    scanf("%d",&N);
+    char s[PATTERN_SIZE];
+    for (int i = 1; i <= N; ++i)
+    {
+        scanf("%s", s);
+        Pattern_Collection.push_back(s);
+        Insert(s, Pattern_Collection.size()-1);
+    }
+}
+
+void BuildFailPoint()
+{
+    int Qh = 0, Qt = 1;
+    Q[1] = Root;
+    while (Qh < Qt)
+    {
+        node *now = Q[++Qh];
+        for (int i = 0; i < CHAR_SET_SIZE; ++i)
+        {
+            if (now->child[i] != NULL)
             {
-                temp=p->fail;
-                while(temp!=NULL)
+                if (now == Root) now->child[i]->fail = Root;
+                else
                 {
-                    if(temp->next[i]!=NULL)
+                    node *p = now->fail;
+                    while (p != NULL)
                     {
-                        p->next[i]->fail=temp->next[i];
-                        break;
+                        if (p->child[i] != NULL)
+                        {
+                            now->child[i]->fail = p->child[i];
+                            break;
+                        }
+                        p = p->fail;
                     }
-                    temp=temp->fail;
+                    if (p == NULL) now->child[i]->fail = Root;
                 }
-                if(temp==NULL)
-                    p->next[i]->fail=root;
-                queue[r++]=p->next[i];
+                Q[++Qt] = now->child[i];
             }
         }
     }
 }
-int find(char *str)//单词查找
+
+char QueryString[QUERY_SIZE];
+
+vector <pair <int,int> > Query()
 {
-    int index;
-    int sum=0;
-    struct node *p,*temp;
-    p=root;
-    for(;*str!='\0';str++)
+    vector <pair <int,int> > Ret;
+    int Len = strlen(QueryString);
+    node *p = Root;
+    for (int i = 0; i != Len; ++i)
     {
-        index=*str-'a';
-        while(p->next[index]==NULL&&p!=root)
-            p=p->fail;
-        p=p->next[index];
-        if(p==NULL)
-            p=root;
-        temp=p;
-        while(temp!=root&&temp->count!=-1)
+        int index = QueryString[i] - 'a';
+        while (p->child[index] == NULL && p != Root) p = p->fail;
+        if (p->child[index] == NULL) continue;
+        p = p->child[index];
+        node *t = p;
+        while (t != Root)
         {
-            sum=sum+temp->count;
-            temp->count=-1;
-            temp=temp->fail;
+            if (t->point != -1) Ret.push_back(make_pair(t->point, i));
+            t = t->fail;
         }
     }
-    return sum;
+    return Ret;
 }
-void del(struct node *root)
+
+void InputQuery()
 {
-    int i;
-    for(i=0;i<26;i++)
+    printf("Input the query string:\n");
+    scanf("%s", QueryString);
+    vector < pair <int,int> > QueryAns = Query();
+    for (int i = 0;i != QueryAns.size(); ++i)
     {
-        if(root->next[i]!=NULL)
-            del(root->next[i]);
+        printf("Found pattern \"%s\" at %d\n",
+                Pattern_Collection[QueryAns[i].first].c_str(),
+                QueryAns[i].second-Pattern_Collection[QueryAns[i].first].size()+1); 
     }
-    delete(root);
 }
+
 int main()
 {
-    int T,n;
-    while(scanf("%d",&T)!=EOF)
-    {
-        while(T--)
-        {
-            root=new node;
-            scanf("%d",&n);
-            getchar();
-            while(n--)
-            {
-                scanf("%s",keyword);
-                build(keyword);
-            }
-            AC_tree();
-            scanf("%s",str);
-            printf("%d\n",find(str));
-            del(root);
-        }
-    }
+    Init();
+    InputPattern();
+    BuildFailPoint();
+    InputQuery();
     return 0;
 }
