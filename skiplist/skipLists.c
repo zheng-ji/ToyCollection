@@ -2,18 +2,20 @@
 #include <stdlib.h>
 
 #define MAX_LEVEL 10
-typedef struct node {
+typedef struct node 
+{
     int value;
     int key;
     struct node *next[1];
 } node;
 
-typedef struct skiplist {
+typedef struct skiplist 
+{
     int level;
     node *header;
 } skiplist;
 
-node *createNode(int level, int key, int value) {
+e *createNode(int level, int key, int value) {
     node *ns = (node *) malloc(sizeof(node) + level * sizeof(node *));
     ns->key = key;
     ns->value = value;
