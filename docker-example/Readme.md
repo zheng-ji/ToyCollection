@@ -11,7 +11,10 @@
 $ sudo docker build -t test/helloweb .
 
 # 开启容器
-$ sudo docker run -p 9998:9999 -v /home/zj/log/helloweb-docker:/data -t -i test/helloweb
+$ sudo docker run -p 9998:9999 -v /home/zj/workspace/go/src/hello/docker-example:/data -t -i test/helloweb
+
+# 想进入命令行看看状态, 指定entrypoint /bin/bash
+$ sudo docker run -p 9998:9999 -v /home/zj/workspace/go/src/hello/docker-example:/data -t -i --entrypoint /bin/bash test/helloweb
 
 ```
 
