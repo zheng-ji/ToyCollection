@@ -20,14 +20,14 @@ using namespace std;
 void setnonblocking(int sock)
 {
     int opts;
-    opts=fcntl(sock,F_GETFL);
-    if(opts<0)
+    opts = fcntl(sock,F_GETFL);
+    if (opts < 0)
     {
         perror("fcntl(sock,GETFL)");
         return;
     }
-    opts = opts|O_NONBLOCK;
-    if(fcntl(sock,F_SETFL,opts)<0)
+    opts = opts | O_NONBLOCK;
+    if (fcntl(sock, F_SETFL, opts) < 0)
     {
         perror("fcntl(sock,SETFL,opts)");
         return;
@@ -42,7 +42,7 @@ void CloseAndDisable(int sockid, epoll_event ee)
 
 int main()
 {
-    int i, maxi, listenfd, connfd, sockfd,epfd,nfds, portnumber;
+    int i, maxi, listenfd, connfd, sockfd, epfd, nfds, portnumber;
     char line[MAXLINE];
     socklen_t clilen;
 
@@ -50,10 +50,10 @@ int main()
 
     //声明epoll_event结构体的变量,ev用于注册事件,数组用于回传要处理的事件
 
-    struct epoll_event ev,events[20];
+    struct epoll_event ev, events[20];
     //生成用于处理accept的epoll专用的文件描述符
 
-    epfd=epoll_create(256);
+    epfd = epoll_create(256);
     struct sockaddr_in clientaddr;
     struct sockaddr_in serveraddr;
     listenfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -61,20 +61,20 @@ int main()
     memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    serveraddr.sin_port=htons(portnumber);
+    serveraddr.sin_port = htons(portnumber);
 
     // bind and listen
     bind(listenfd,(sockaddr *)&serveraddr, sizeof(serveraddr));
     listen(listenfd, LISTENQ);
 
     //设置与要处理的事件相关的文件描述符
-    ev.data.fd=listenfd;
+    ev.data.fd = listenfd;
     //设置要处理的事件类型
-    ev.events=EPOLLIN|EPOLLET;
+    ev.events = EPOLLIN | EPOLLET;
     //ev.events=EPOLLIN;
 
     //注册epoll事件
-    epoll_ctl(epfd,EPOLL_CTL_ADD,listenfd,&ev);
+    epoll_ctl(epfd, EPOLL_CTL_ADD, listenfd, &ev);
 
     maxi = 0;
 
@@ -85,34 +85,33 @@ int main()
             break;
         //等待epoll事件的发生
 
-        nfds=epoll_wait(epfd,events,20,-1);
+        nfds = epoll_wait(epfd,events,20,-1);
         //处理所发生的所有事件
         cout << "\nepoll_wait returns\n";
 
-        for(i=0;i<nfds;++i)
+        for (i = 0; i < nfds; ++i)
         {
-            if(events[i].data.fd==listenfd)//如果新监测到一个SOCKET用户连接到了绑定的SOCKET端口，建立新的连接。
+            if (events[i].data.fd == listenfd)//如果新监测到一个SOCKET用户连接到了绑定的SOCKET端口，建立新的连接。
             {
-                connfd = accept(listenfd,(sockaddr *)&clientaddr, &clilen);
-                if(connfd<0){
+                connfd = accept(listenfd, (sockaddr *)&clientaddr, &clilen);
+                if (connfd < 0) {
                     perror("connfd<0");
                     return (1);
                 }
-
 
                 char *str = inet_ntoa(clientaddr.sin_addr);
                 cout << "accapt a connection from " << str << endl;
                 //设置用于读操作的文件描述符
 
                 setnonblocking(connfd);
-                ev.data.fd=connfd;
+                ev.data.fd = connfd;
                 //设置用于注测的读操作事件
 
-                ev.events=EPOLLIN | EPOLLET;
+                ev.events = EPOLLIN | EPOLLET;
                 //ev.events=EPOLLIN;
 
                 //注册ev
-                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev);
+                epoll_ctl(epfd, EPOLL_CTL_ADD, connfd, &ev);
             }
             else if(events[i].events & EPOLLIN)//如果是已经连接的用户，并且收到数据，那么进行读入。
             {
@@ -128,9 +127,9 @@ int main()
                 {
                     // 确保sockfd是nonblocking的
                     recvNum = recv(sockfd, head + count, MAXLINE, 0);
-                    if(recvNum < 0)
+                    if (recvNum < 0)
                     {
-                        if(errno == EAGAIN)
+                        if (errno == EAGAIN)
                         {
                             // 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读
                             // 在这里就当作是该次事件已处理处.
@@ -157,7 +156,7 @@ int main()
                             break;
                         }
                     }
-                    else if( recvNum == 0)
+                    else if (recvNum == 0)
                     {
                         // 这里表示对端的socket已正常关闭.发送过FIN了。
                         CloseAndDisable(sockfd, events[i]);
@@ -207,7 +206,7 @@ int main()
                 int writenLen = 0;
                 int count = 0;
                 char * head = line;
-                while(1)
+                while (1)
                 {
                     // 确保sockfd是非阻塞的
                     writenLen = send(sockfd, head + count, MAXLINE, 0);
