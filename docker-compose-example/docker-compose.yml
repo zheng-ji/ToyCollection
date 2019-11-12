@@ -1,4 +1,5 @@
 version: '3'
+
 services:
     web:
         build: .
@@ -8,3 +9,10 @@ services:
             - .:/code
     redis:
         image: "redis:alpine"
+
+networks:
+    default:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.177.57.0/24
