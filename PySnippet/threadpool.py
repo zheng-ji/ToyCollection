@@ -18,7 +18,7 @@ with ThreadPoolExecutor(max_workers=5) as t:  # 创建一个最大容纳数量�
     print(f"task2: {task2.done()}")
     print(task1.result())
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, ProcessPoolExecutor
 import time
 
 
@@ -26,6 +26,7 @@ def spider(page):
     time.sleep(page)
     print(f"crawl task{page} finished")
     return page
+
 
 def main():
     with ThreadPoolExecutor(max_workers=5) as t:
@@ -38,6 +39,17 @@ def main():
             data = future.result()
             print(f"main: {data}")
 
+def main2():
+    with ProcessPoolExecutor(max_workers=5) as t:
+        obj_list = []
+        for page in range(1, 5):
+            obj = t.submit(spider, page)
+            obj_list.append(obj)
+        
+        for future in as_completed(obj_list):
+            data = future.result()
+            print(f"main: {data}")
+
 if __name__ == "__main__":
-    main()
+    main2()
 
