@@ -10,5 +10,9 @@
 mvn install
 ```
 
-若能执行成功，则说明 Maven 可正常下载到依赖的 jar。
+### 执行指定的main函数
+
+```
+java -jar xxx-with-dependence.jar
+```
 
