@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-pod # pod的名称
+spec:
+  volumes:
+  - name: shared-date-logs  # 为Pod里的容器创建一个共享数据卷
+    emptyDir: {}
+  containers:
+  - name: container-writing-dates # 第一个容器的名称
+    image: alpine # 容器的镜像
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do date >> /var/log/output.txt; sleep 10;done"] # 每10秒写入当前时间
+    volumeMounts:
+    - name: shared-date-logs
+      mountPath: /var/log # 将数据卷挂在到容器的/var/log目录
+  - name: container-serving-dates # 第二个容器的名字
+    image: nginx:1.7.9 # 容器的镜像
+    ports:
+      - containerPort: 80 # 定义容器提供服务的端口
+    volumeMounts:
+    - name: shared-date-logs
+      mountPath: /usr/share/nginx/html # 将数据卷
